@@ -6,7 +6,7 @@ import 'package:sing_plugin_tools/export.dart';
 import 'routes/app_pages.dart';
 
 void main() async {
-  AppColor.main = const Color(0xff6ca76d);
+  AppColor.main = const Color(0xFFEECA50);
   SpUtil.init(SpUtil.spKey);
   await GetStorage.init(SpUtil.spKey);
 
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isFirst = SpUtil.read(SpUtil.IS_FIRST,true);
     ScreenUtil.init(context);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           debugShowCheckedModeBanner:false,
-          initialRoute:AppPages.INITIAL,
+          initialRoute: isFirst ? Routes.GUIDE : Routes.SPLASH,
           getPages:AppPages.routes,
           builder: EasyLoading.init(builder: (context, widget) {
             return MediaQuery(
